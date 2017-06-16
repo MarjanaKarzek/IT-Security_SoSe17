@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_xgpCsVKXEeex8dSV2Eiqzw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_xgpCslKXEeex8dSV2Eiqzw" bindingContexts="_xgppwVKXEeex8dSV2Eiqzw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Dictionary.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Decrypter.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Decrypter.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Simple_Substitution_Cipher_Solver/src/Decrypter.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Dictionary.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_xgpCslKXEeex8dSV2Eiqzw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_xw0zwlKXEeex8dSV2Eiqzw" label="%trimmedwindow.label.eclipseSDK" x="-7" y="0" width="974" height="1047">
@@ -11,6 +11,7 @@
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workingSets/>"/>
     <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1497619751895"/>
     <tags>topLevel</tags>
+    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_xw0zwlKXEeex8dSV2Eiqzw" selectedElement="_xw0zw1KXEeex8dSV2Eiqzw" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_xw0zw1KXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_6k870VKXEeex8dSV2Eiqzw">
         <children xsi:type="advanced:Perspective" xmi:id="_yANTkFKXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.resourcePerspective" selectedElement="_yANTkVKXEeex8dSV2Eiqzw" label="Resource" iconURI="platform:/plugin/org.eclipse.ui.ide.application/$nl$/icons/full/eview16/resource_persp.png">
@@ -205,12 +206,18 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_x_804FKXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.editorss" selectedElement="_x_804VKXEeex8dSV2Eiqzw">
-      <children xsi:type="basic:PartStack" xmi:id="_x_804VKXEeex8dSV2Eiqzw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_W4sBwFKZEeex8dSV2Eiqzw">
+      <children xsi:type="basic:PartStack" xmi:id="_x_804VKXEeex8dSV2Eiqzw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_A09HAFKoEeeSZ9H1nRUSKw">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_W4sBwFKZEeex8dSV2Eiqzw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Dictionary.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Dictionary.java&quot; partName=&quot;Dictionary.java&quot; title=&quot;Dictionary.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;795&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Dictionary.java&quot; partName=&quot;Dictionary.java&quot; title=&quot;Dictionary.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Simple_Substitution_Cipher_Solver/src/Dictionary.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_A09HAFKoEeeSZ9H1nRUSKw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Decrypter.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Decrypter.java&quot; partName=&quot;Decrypter.java&quot; title=&quot;Decrypter.java&quot; tooltip=&quot;Simple_Substitution_Cipher_Solver/src/Decrypter.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Simple_Substitution_Cipher_Solver/src/Decrypter.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4936&quot; selectionTopPixel=&quot;2666&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -345,7 +352,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_x0vqcFKXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_x04NUFKXEeex8dSV2Eiqzw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_xhTKB1KXEeex8dSV2Eiqzw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_3C4wAFKnEeeSZ9H1nRUSKw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_xhTKB1KXEeex8dSV2Eiqzw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_x0vqcVKXEeex8dSV2Eiqzw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -369,7 +376,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_x0wRgFKXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_x06CgFKXEeex8dSV2Eiqzw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_xhQt41KXEeex8dSV2Eiqzw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_3C7MQFKnEeeSZ9H1nRUSKw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_xhQt41KXEeex8dSV2Eiqzw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_x0wRgVKXEeex8dSV2Eiqzw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
