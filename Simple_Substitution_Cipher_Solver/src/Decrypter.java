@@ -8,13 +8,7 @@ public class Decrypter {
 	private char[] lettersByFrequency = { 'e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'c', 'u', 'm', 'w',
 			'f', 'g', 'y', 'p', 'b', 'v', 'k', 'j', 'x', 'q', 'z' };
 	private String[] oneLetterWords = { "a", "i" };
-	private String[] twoLetterWords = { "of", "to", "in", "it", "is", "be", "as", "at", "so", "we", "he", "by",
-										"or", "on", "do", "if", "me", "my", "up", "an", "go", "no", "us", "am"};
-	private String[] threeLetterWords = { "the", "and", "for", "are", "but", "not", "you", "all", "any", "can",
-										  "had", "her", "was", "one", "our", "out", "day", "get", "has", "him",
-										  "his", "how", "man", "new", "now", "old", "see", "two", "way", "who",
-										  "boy", "did", "its", "let", "put", "say", "she", "too", "use" };
-	private HashMap<Character, Character> frequencyMapping;
+	private HashMap<Character, Character> keyMap;
 	private String mask;
 	
 	private Dictionary dictionary;
@@ -58,7 +52,9 @@ public class Decrypter {
 	
 	private void initializePlainwords() {
 		plainwords = new StringBuilder[cipherwords.length];
+		
 		for(int i = 0; i < plainwords.length; i++){
+			plainwords[i] = new StringBuilder();
 			for(int j = 0; j < cipherwords[i].length(); j++){
 				plainwords[i].append(" ");				
 			}
@@ -81,8 +77,8 @@ public class Decrypter {
 		for(int i = 0; i < plainwords.length; i++){
 			for(int j = 0; j < plainwords[i].length(); j++){
 				if(plainwords[i].charAt(j) == ' '){
-					if(frequencyMapping.containsKey(cipherwords[i].charAt(j))){
-						plainwords[i].setCharAt(j, frequencyMapping.get(cipherwords[i].charAt(j)));
+					if(keyMap.containsKey(cipherwords[i].charAt(j))){
+						plainwords[i].setCharAt(j, keyMap.get(cipherwords[i].charAt(j)));
 					}
 				}
 			}
@@ -127,13 +123,15 @@ public class Decrypter {
 	}
 
 	private void getFrequencyMapping() {
-		frequencyMapping = new HashMap<Character, Character>();
+		keyMap = new HashMap<Character, Character>();
 		for (int i = 0; i < frequencies.length; i++) {
 			int currentMaxIndex = getNextMaxFromFrequencyTable();
 			if (currentMaxIndex == -1)
 				return;
 			//cipherletter --> plainletter
-			frequencyMapping.put((char) (currentMaxIndex + 97), lettersByFrequency[i]);
+			keyMap.put((char) (currentMaxIndex + 97), lettersByFrequency[i]);
+			if(keyMap.size() >= 5)
+				return;
 		}
 	}
 
@@ -154,8 +152,8 @@ public class Decrypter {
 	private void generateMaskFromFrequencyMapping() {
 		mask = "";
 		for (int i = 0; i < ciphertext.length(); i++) {
-			if (frequencyMapping.get(ciphertext.charAt(i)) != null)
-				mask += frequencyMapping.get(ciphertext.charAt(i));
+			if (keyMap.get(ciphertext.charAt(i)) != null)
+				mask += keyMap.get(ciphertext.charAt(i));
 			else
 				mask += " ";
 		}
@@ -181,8 +179,8 @@ public class Decrypter {
 
 	private void displayFrequencyMapping() {
 		System.out.println("Frequency Mapping");
-		for (char key : frequencyMapping.keySet()) {
-			System.out.println("" + key + " -> " + frequencyMapping.get(key));
+		for (char key : keyMap.keySet()) {
+			System.out.println("" + key + " -> " + keyMap.get(key));
 		}
 		System.out.println();
 	}
