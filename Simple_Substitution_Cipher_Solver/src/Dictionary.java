@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Dictionary {
@@ -28,5 +29,15 @@ public class Dictionary {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<String> search(String regEx){
+		ArrayList<String> result = new ArrayList<String>();
+		for(String word: dictionary){
+			if(word.matches(regEx))
+				result.add(word);
+				
+		}
+		return result;
 	}
 }
