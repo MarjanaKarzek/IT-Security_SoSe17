@@ -37,8 +37,8 @@ public class Decrypter {
 	}
 
 	public static void main(String[] args) {
-		Decrypter decrypter = new Decrypter(
-				"Rbo rpktigo vcrb bwucja wj kloj hcjd km sktpqo cq rbwr loklgo vcgg cjqcqr kj skhcja wgkja wjd rpycja rk ltr rbcjaq cj cr Roppy Lpwrsborr");
+		//Decrypter decrypter = new Decrypter("Rbo rpktigo vcrb bwucja wj kloj hcjd km sktpqo cq rbwr loklgo vcgg cjqcqr kj skhcja wgkja wjd rpycja rk ltr rbcjaq cj cr Roppy Lpwrsborr");
+		Decrypter decrypter = new Decrypter("SIAA ZQ LKBA VA ZOA RFPBLUAOAR");
 		decrypter.initializeFrequencyTable();
 		decrypter.getFrequencies();
 		decrypter.displayFrequencies();
