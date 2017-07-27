@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class Decrypter {
 
@@ -28,34 +29,39 @@ public class Decrypter {
 		this.dictionary = new Dictionary();
 		this.cipherwords = ciphertext.split(" ");
 		initializePlainwords();
+		initializeFrequencyTable();
+		getFrequencies();
+		getFrequencyMapping();
 	}
 
 	public static void main(String[] args) {
-		Decrypter decrypter = new Decrypter("GIUIFG CEI IPRC TPNN DU P QPRCNI");
-		decrypter.initializeFrequencyTable();
-		decrypter.getFrequencies();
-		decrypter.displayFrequencies();
-		decrypter.getFrequencyMapping();
-		decrypter.displayKey();
-
-		if (decrypter.solveWithPermutationAmount()) {
+		//Ciphertext: atitla zjt tsrz ksdd s bi zjt csrzdt
+		//Plaintext:  defend the east wall a of the castle
+		//Key:        sncatiqjpfgdelboyxrzumkwhv
+		
+		//Ciphertext: gp wp wbs qyt y dyx oyx
+		//Plaintext:  go to the way a man can
+		//Key: 		  yfocslgbkvajdxpzmhnwerquti
+		
+		//Ciphertext: rbsr morb bsja rbov mogg wiku zuin rbaw xfim msfr daaf tiiy nkpb vina rona
+		//Plaintext:  that with have this will your from they know want been good much some time
+		//Key: 		  sdpyaztbolxgnfiheuvrkjmqwc
+		
+		//Ciphertext: jqcqfacnlkccntk jqmknmlqfjnoeqflonrhqj rhfmktqjflonggntqjnc rfcqkmjkrhncfgpkcqtqs
+		//Plaintext:  cilioflagellate cineangiocardiographic phoneticogrammatical poliencephalomyelitis
+		//Key: 		  nujekalhqvzcgmfrdostibyxpw
+		
+		//Ciphertext: eclcdbtbumpbobqwyblbqmqbpwg mlqbybgsgqmpobgerslqmdbmlbgr tocuublmwublbebobnbobtbumqbcl nlswrclcwoqdmrbudcgucnbugbobuczcoumlcuclbcgbg
+		//Plaintext:  honorificabilitudinitatibus antidisestablishmentarianism floccinaucinihilipilification pneumonoultramicroscopicsilicovolcanoconiosis
+		//Key:		  mpuystxebfkorlcnvdgqwzjahi
+		Decrypter decrypter = new Decrypter("eclcdbtbumpbobqwyblbqmqbpwg mlqbybgsgqmpobgerslqmdbmlbgr tocuublmwublbebobnbobtbumqbcl nlswrclcwoqdmrbudcgucnbugbobuczcoumlcuclbcgbg");
+		// decrypter.displayFrequencies();
+		// decrypter.displayKey();
+		if (decrypter.solveWithPermutation()) {
 			decrypter.displayPlaintext();
+			decrypter.displayKey();
 		} else
 			System.out.println("Didn't work");
-	}
-
-	/**
-	 * Initalizes the plainwords array
-	 */
-	private void initializePlainwords() {
-		plainwords = new StringBuilder[cipherwords.length];
-
-		for (int i = 0; i < plainwords.length; i++) {
-			plainwords[i] = new StringBuilder();
-			for (int j = 0; j < cipherwords[i].length(); j++) {
-				plainwords[i].append(" ");
-			}
-		}
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class Decrypter {
 	 * @return If the method ran successfully it returns <code>true</code> else
 	 *         <code>false</code>.
 	 */
-	private boolean solveWithPermutationAmount() {
+	private boolean solveWithPermutation() {
 		for (int i = 5; i >= 0; i--) {
 			if (i > 0) {
 				permutationCounter = 0;
@@ -84,13 +90,12 @@ public class Decrypter {
 				if (solve(false, 0)) {
 					return true;
 				} else {
-					/*
-					 * remove no longer used letters because of permutation
-					 * decrease from key
-					 */
+					// remove no longer used letters because of permutation
+					// decrease from key
 					removeKey(permutations[i - 1]);
 				}
 			} else {
+				keyMap.clear();
 				if (solveWithoutPermutation(false))
 					return true;
 				else
@@ -102,12 +107,13 @@ public class Decrypter {
 
 	/**
 	 * This method solves the cipher by applying every permutation to the key.
-	 * Afterwards it runs the method <code>solveOneLetterWords</code>.
-	 * If this doesn't work, it tries the next permutation.
+	 * Afterwards it runs the method <code>solveOneLetterWords</code>. If this
+	 * doesn't work, it tries the next permutation.
 	 * 
 	 * @param finished
 	 * @param permutation
-	 * @return returns <code>true</code> if the permutation worked else <code>false</code>.
+	 * @return returns <code>true</code> if the permutation worked else
+	 *         <code>false</code>.
 	 */
 	private boolean solve(boolean finished, int permutation) {
 		System.out.println("" + (permutation + 1) + " for current length: " + allPermutations.size());
@@ -116,9 +122,11 @@ public class Decrypter {
 			return false;
 		currentPermutation = allPermutations.get(permutation);
 		System.out.println("Trying: " + currentPermutation.toString());
+		initializePlainwords();
 		addPermutationToKey();
 		applyKey();
-		displayKey();
+		//displayKey();
+		displayMatching();
 		if (!solveOneLetterWords(false))
 			// if the recursion failed with the current permutation try the next
 			solve(false, permutation + 1);
@@ -128,11 +136,13 @@ public class Decrypter {
 	}
 
 	/**
-	 * This method solves the cipher without a permutation and directly applys the method <code>solveNLetterWords</code>.
-	 * If this doesn't work the ciphertext could not be broken.
+	 * This method solves the cipher without a permutation and directly applys
+	 * the method <code>solveNLetterWords</code>. If this doesn't work the
+	 * ciphertext could not be broken.
 	 * 
 	 * @param finished
-	 * @return returns <code>true</code> if the ciphertext was solved else <code>false</code>.
+	 * @return returns <code>true</code> if the ciphertext was solved else
+	 *         <code>false</code>.
 	 */
 	private boolean solveWithoutPermutation(boolean finished) {
 		System.out.println("Trying without permutation ");
@@ -146,8 +156,9 @@ public class Decrypter {
 	}
 
 	/**
-	 * This method is used to search for one letter words and apply a matching key.
-	 * If both words are already used, the method gets skipped.
+	 * This method is used to search for one letter words and apply a matching
+	 * key. If both words are already used, the method gets skipped.
+	 * 
 	 * @param finished
 	 * @return
 	 */
@@ -156,31 +167,36 @@ public class Decrypter {
 			return true;
 		else {
 			for (int k = 0; k < cipherwords.length; k++) {
-				char cipherI = '0';
 				char cipherA = '0';
+				char cipherI = '0';
+				int lastFoundA = 0;
+				int lastFoundI = 0;
 				if (keyMap.containsValue('a') == false) {
-					for (int i = 0; i < cipherwords.length; i++) {
+					for (int i = lastFoundA; i < cipherwords.length; i++) {
 						if (cipherwords[i].length() == 1) {
 							if (plainwords[i].toString().contains(" ")) {
 								addKey(cipherwords[i].charAt(0), 'a');
 								cipherA = cipherwords[i].charAt(0);
+								lastFoundA = i;
 								applyKey();
 							}
 						}
 					}
 				}
 				if (keyMap.containsValue('i') == false) {
-					for (int i = 0; i < cipherwords.length; i++) {
+					for (int i = lastFoundI; i < cipherwords.length; i++) {
 						if (cipherwords[i].length() == 1) {
 							if (plainwords[i].toString().contains(" ")) {
 								addKey(cipherwords[i].charAt(0), 'i');
 								cipherI = cipherwords[i].charAt(0);
+								lastFoundI = i;
 								applyKey();
 							}
 						}
 					}
 				}
 				if (cipherA != '0' || cipherI != '0') {
+					displayKey();
 					if (solveThe(false)) {
 						return true;
 					} else {
@@ -241,12 +257,22 @@ public class Decrypter {
 	 */
 	private boolean solveNLetterWords(boolean finished, ArrayList<String> remainingCipherWords,
 			ArrayList<StringBuilder> remainingPlainWords) {
+		//System.out.println(remainingPlainWords.toString());
 		if (remainingPlainWords.size() == 0) {
-			return true;
+			displayPlaintext();
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Keep searching (y/n?) ");
+			char choice = scanner.next().charAt(0);
+			if(choice == 'n')
+				return true;
+			else
+				return false;
 		} else {
 			StringBuilder currentWord = remainingPlainWords.get(0);
 			String regEx = setUpRegEx(currentWord.toString());
+			//System.out.println(regEx);
 			ArrayList<String> result = dictionary.search(regEx);
+			//System.out.println(result.toString());
 			ArrayList<Character> currentAddedKeys = new ArrayList<Character>();
 			for (String resultWord : result) {
 				for (int i = 0; i < currentWord.length(); i++) {
@@ -261,25 +287,37 @@ public class Decrypter {
 				}
 				ArrayList<String> newRemainingCipherWords = getRemainingCipherWords();
 				ArrayList<StringBuilder> newRemainingPlainWords = getRemainingPlainWords();
-				if (solveNLetterWords(false, newRemainingCipherWords, newRemainingPlainWords))
-					return true;
+				if (solveNLetterWords(false, newRemainingCipherWords, newRemainingPlainWords)){
+					displayPlaintext();
+					Scanner scanner = new Scanner(System.in);
+					System.out.print("Keep searching (y/n?) ");
+					char choice = scanner.next().charAt(0);
+					if(choice == 'n')
+						return true;
+					else
+						return false;
+				}
 				else {
 					for (int i = 0; i < currentAddedKeys.size(); i++) {
 						removeKey(currentAddedKeys.get(i));
 					}
 				}
+				//displayMatching();
 			}
+			//displayMatching();
 		}
 		return false;
 	}
 
 	/**
 	 * This method creates a regular expression from a string.
-	 * @param word the string to be processed.
+	 * 
+	 * @param word
+	 *            the string to be processed.
 	 * @return the regular expression.
 	 */
 	private String setUpRegEx(String word) {
-		HashSet<Character> currentAlphabet = alphabet;
+		HashSet<Character> currentAlphabet = new HashSet<Character>(alphabet);
 		currentAlphabet.removeAll(keyMap.values());
 
 		String letters = "";
@@ -291,17 +329,19 @@ public class Decrypter {
 		for (int i = 0; i < word.length(); i++) {
 			switch (word.charAt(i)) {
 			case ' ':
-				regEx += "\\[" + letters + "\\]";
+				regEx += "[" + letters + "]";
 				break;
 			default:
-				regEx += "\\[" + word.charAt(i) + "\\]";
+				regEx += "[" + word.charAt(i) + "]";
 			}
 		}
 		return regEx;
 	}
-	
+
 	/**
-	 * Gets the current remaining strings of the array plainwords to decrease calculations.
+	 * Gets the current remaining strings of the array plainwords to decrease
+	 * calculations.
+	 * 
 	 * @return Returns an array of the remaining plainwords.
 	 */
 	private ArrayList<StringBuilder> getRemainingPlainWords() {
@@ -315,7 +355,9 @@ public class Decrypter {
 	}
 
 	/**
-	 * Gets the current remaining strings of the array cipherwords to decrease calculations.
+	 * Gets the current remaining strings of the array cipherwords to decrease
+	 * calculations.
+	 * 
 	 * @return Returns an array of the remaining cipherwords.
 	 */
 	private ArrayList<String> getRemainingCipherWords() {
@@ -352,7 +394,7 @@ public class Decrypter {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method puts the keys onto the plainwords mask.
 	 */
@@ -364,6 +406,20 @@ public class Decrypter {
 						plainwords[i].setCharAt(j, keyMap.get(cipherwords[i].charAt(j)));
 					}
 				}
+			}
+		}
+	}
+
+	/**
+	 * Initalizes the plainwords array
+	 */
+	private void initializePlainwords() {
+		plainwords = new StringBuilder[cipherwords.length];
+
+		for (int i = 0; i < plainwords.length; i++) {
+			plainwords[i] = new StringBuilder();
+			for (int j = 0; j < cipherwords[i].length(); j++) {
+				plainwords[i].append(" ");
 			}
 		}
 	}
@@ -389,13 +445,12 @@ public class Decrypter {
 				frequencies[charvalue]++;
 			}
 		}
-		// Test
-		displayFrequencies();
+		// Test displayFrequencies();
 	}
 
 	/**
-	 * Rewritten to only get maximum the five most common letters and prepare
-	 * them for permutation.
+	 * Gets maximum the five most common letters and prepares them for
+	 * permutation.
 	 */
 	private void getFrequencyMapping() {
 		keyMap = new HashMap<Character, Character>();
@@ -411,7 +466,7 @@ public class Decrypter {
 			permutations[i] = (char) (currentMaxIndex + 97);
 		}
 	}
-	
+
 	/**
 	 * Checks for the next maximum value and sets it to 0 to get the five most
 	 * common letters in the ciphertext
@@ -433,8 +488,7 @@ public class Decrypter {
 	}
 
 	/**
-	 * ToDo: add functionality to set the current permutation mapped to the
-	 * plaintext letters as key
+	 * Sets the current permutation mapped to the plaintext letters as key.
 	 */
 	private void addPermutationToKey() {
 		keyMap.clear();
@@ -445,8 +499,8 @@ public class Decrypter {
 	}
 
 	/**
-	 * Gets all permutations of "mostCommonLetters".
-	 * Adds them list by list to "allPermutations".
+	 * Gets all permutations of "mostCommonLetters". Adds them list by list to
+	 * "allPermutations".
 	 * 
 	 * Source:
 	 * http://www2.cs.uni-paderborn.de/cs/ag-boettcher/lehrealt/swe1-w02/
@@ -468,7 +522,9 @@ public class Decrypter {
 	}
 
 	/**
-	 * Used by the method <code>initializePermutation</code> to get the permutations by swapping elements.
+	 * Used by the method <code>initializePermutation</code> to get the
+	 * permutations by swapping elements.
+	 * 
 	 * @param arr
 	 * @param i
 	 * @param N
@@ -480,7 +536,9 @@ public class Decrypter {
 	}
 
 	/**
-	 * Used by the method <code>initializePermutation</code> to add the calculated permutation to the list.
+	 * Used by the method <code>initializePermutation</code> to add the
+	 * calculated permutation to the list.
+	 * 
 	 * @param arr
 	 */
 	private void addPermutationArrayToList(char[] arr) {
@@ -503,7 +561,7 @@ public class Decrypter {
 			System.out.println();
 		}
 	}
-	
+
 	/**
 	 * Displays all Frequencies.
 	 */
@@ -525,13 +583,27 @@ public class Decrypter {
 		}
 		System.out.println();
 	}
-	
+
 	/**
 	 * Shows the plaintext
 	 */
 	private void displayPlaintext() {
 		for (int i = 0; i < plainwords.length; i++) {
 			System.out.print(plainwords[i] + " ");
+		}
+		System.out.println();
+	}
+
+	/**
+	 * Displays the current matching between plain- and cipherwords.
+	 */
+	private void displayMatching(){
+		for(String word: cipherwords){
+			System.out.print(word + " ");
+		}
+		System.out.println();
+		for(int i = 0; i< plainwords.length; i++){
+			System.out.print(plainwords[i].toString() + " ");
 		}
 		System.out.println();
 	}

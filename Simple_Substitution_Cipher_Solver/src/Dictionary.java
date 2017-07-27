@@ -20,10 +20,8 @@ public class Dictionary {
 			br = new BufferedReader(new FileReader(".//src//words.txt"));
 			String line = br.readLine();
 			while (line != null) {
+				dictionary.add(line);
 				line = br.readLine();
-				if (line != null) {
-					dictionary.add(line);
-				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -37,7 +35,6 @@ public class Dictionary {
 		for(String word: dictionary){
 			if(word.matches(regEx))
 				result.add(word);
-				
 		}
 		return result;
 	}
