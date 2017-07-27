@@ -35,30 +35,43 @@ public class Decrypter {
 	}
 
 	public static void main(String[] args) {
+		//Test 1
 		//Ciphertext: atitla zjt tsrz ksdd s bi zjt csrzdt
 		//Plaintext:  defend the east wall a of the castle
 		//Key:        sncatiqjpfgdelboyxrzumkwhv
-		
+
+		//Test 2
 		//Ciphertext: gp wp wbs qyt y dyx oyx
 		//Plaintext:  go to the way a man can
 		//Key: 		  yfocslgbkvajdxpzmhnwerquti
-		
+
+		//Test 3
 		//Ciphertext: rbsr morb bsja rbov mogg wiku zuin rbaw xfim msfr daaf tiiy nkpb vina rona
 		//Plaintext:  that with have this will your from they know want been good much some time
 		//Key: 		  sdpyaztbolxgnfiheuvrkjmqwc
-		
+
+		//Test 4
 		//Ciphertext: jqcqfacnlkccntk jqmknmlqfjnoeqflonrhqj rhfmktqjflonggntqjnc rfcqkmjkrhncfgpkcqtqs
 		//Plaintext:  cilioflagellate cineangiocardiographic phoneticogrammatical poliencephalomyelitis
 		//Key: 		  nujekalhqvzcgmfrdostibyxpw
-		
+
+		//Test 5
 		//Ciphertext: eclcdbtbumpbobqwyblbqmqbpwg mlqbybgsgqmpobgerslqmdbmlbgr tocuublmwublbebobnbobtbumqbcl nlswrclcwoqdmrbudcgucnbugbobuczcoumlcuclbcgbg
 		//Plaintext:  honorificabilitudinitatibus antidisestablishmentarianism floccinaucinihilipilification pneumonoultramicroscopicsilicovolcanoconiosis
 		//Key:		  mpuystxebfkorlcnvdgqwzjahi
-		Decrypter decrypter = new Decrypter("eclcdbtbumpbobqwyblbqmqbpwg mlqbybgsgqmpobgerslqmdbmlbgr tocuublmwublbebobnbobtbumqbcl nlswrclcwoqdmrbudcgucnbugbobuczcoumlcuclbcgbg");
+
+		//Test 6
+		//Perfect frequency for first four letters
+		//Ciphertext: kmprsvykmq myxk mfmv cb mfst y hccd y ujkkmp
+		//Plaintext:  terminated east even of evil a pook a butter
+		//Key:		  yulqmbaesgdtrvchzpxkjfiown
+		Decrypter decrypter = new Decrypter("kmprsvykmq myxk mfmv cb mfst y hccd y ujkkmp");
 		// decrypter.displayFrequencies();
 		// decrypter.displayKey();
 		if (decrypter.solveWithPermutation()) {
+			System.out.println("The found plaintext is the following: ");
 			decrypter.displayPlaintext();
+			System.out.println("This is the used key for the letters of the plaintext: ");
 			decrypter.displayKey();
 		} else
 			System.out.println("Didn't work");
@@ -196,7 +209,7 @@ public class Decrypter {
 					}
 				}
 				if (cipherA != '0' || cipherI != '0') {
-					displayKey();
+					//displayKey();
 					if (solveThe(false)) {
 						return true;
 					} else {

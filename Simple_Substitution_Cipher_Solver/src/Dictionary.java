@@ -16,7 +16,6 @@ public class Dictionary {
 	private void fillDictionary(){
 		BufferedReader br;
 		try {
-			//br = new BufferedReader(new FileReader("C://Users//marja//Documents//HTW//5. Semester//IT Security//Cipher//src//words.txt"));
 			br = new BufferedReader(new FileReader(".//src//words.txt"));
 			String line = br.readLine();
 			while (line != null) {
